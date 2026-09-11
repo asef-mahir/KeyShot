@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&display=swap');
+
 * {
     box-sizing : border-box;
     margin : 0;
@@ -11,7 +13,7 @@ body{
     justify-content: center;
     align-items: center;
 
-    font-family: Arial, sans-serif;
+    font-family: 'Orbitron' , sans-serif;
 
     background: #17192c;
     color: white;
@@ -22,7 +24,7 @@ body{
     padding: 30px;
 
     background: #252840;
-    border: 2px solid #4ade80;
+    border: 2px solid #00c853;
     border-radius : 15px;
 
     text-align : center;
@@ -75,10 +77,15 @@ select, input[type="range"] {
     width : 100%;
 }
 
+input[type="range"] {
+    accent-color: #39d353;
+    cursor: pointer;
+}
+
 select{
     padding : 10px;
 
-    background: #292929;
+    background: #303354;
     color: white;
 
     border: 2px solid #444;
