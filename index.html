@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>KeyShot</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <main class="app">
+
+        <header>
+            <h1>KeyShot</h1>
+            <p><i><b>Turn your keyboard into a weapon.</i></b></p>
+        </header>
+
+        <section class="status">
+            <span class="status-dot"></span>
+            <span>ACTIVE</span>
+        </section>
+
+        <section class="controls">
+            <div class="control-group">
+
+                <label for="weapon">Weapon</label>
+
+                <select id="weapon">
+                    <option value="shotgun2">Shotgun 2</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+
+                <label for="volume">Volume : <span id="volume-value">50%</span></label>
+
+                <input type="range" id="volume" min="0" max="100" value="50">
+            </div>
+        </section>
+
+        <button id="test-fire">TEST FIRE🔥 </button>
+
+        <p class="hint">Press any key on your keyboard to fire.</p>
+
+    </main>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

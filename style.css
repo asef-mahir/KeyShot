@@ -1,0 +1,113 @@
+* {
+    box-sizing : border-box;
+    margin : 0;
+    padding : 0;
+}
+
+body{
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: Arial, sans-serif;
+
+    background: #17192c;
+    color: white;
+}
+
+.app{
+    width : 400px;
+    padding: 30px;
+
+    background: #574949;
+    border: 2px solid #00ff0d;
+    border-radius : 15px;
+
+    text-align : center;
+}
+
+header h1{
+    font-size: 38px;
+    margin-bottom: 15px;
+}
+
+header p {
+    color: #aaa;
+}
+
+.status{
+    margin: 25px 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+
+    font-size: 14px;
+}
+
+.status-dot{
+    width: 10px;
+    height: 10px;
+
+    background: #39d353;
+    border-radius: 50%;
+}
+
+.controls{
+    text-align: left;
+}
+
+.control-group{
+    margin-bottom: 20px;
+
+}
+
+.control-group label{
+    display: block;
+    margin-bottom: 5px;
+}
+
+select, input[type="range"] {
+    width : 100%;
+}
+
+select{
+    padding : 10px;
+
+    background: #292929;
+    color: white;
+
+    border: 2px solid #e5399d;
+    border-radius: 5px;
+}
+
+#test-fire{
+    width : 100%;
+    padding: 12px;
+
+    margin-top: 10px;
+
+    border : none;
+    border-radius : 8px;
+
+    background: #e63946;
+    color: white;
+
+    font-size: 16px;
+    font-weight:bold;
+
+    cursor: pointer;
+}
+
+#test-fire:hover {
+    background: #ff4d5a;
+}
+
+.hint{
+    margin-top : 18px;
+    color: #888;
+    font-size: 13px;
+}
