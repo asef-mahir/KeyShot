@@ -25,20 +25,18 @@ function playGunShot(weaponKey){
     gunshot.play();
 }     
 
-document.addEventListener("keydown", function(event){
-    console.log(event.key);
+function triggerSound(){
     playGunShot(selectedWeapon);
-});
+}
+
+document.addEventListener("keydown", triggerSound)
 
 volumeSlider.addEventListener("input", function(){
     volumeValue.textContent = `${volumeSlider.value}%`;
 })
 
-testFireButton.addEventListener("click", function(){
-    playGunShot(selectedWeapon);
-})
+testFireButton.addEventListener("click", triggerSound)
 
 weaponSelector.addEventListener("change", function(event){
     selectedWeapon = event.target.value;
-    console.log(selectedWeapon);
 })
