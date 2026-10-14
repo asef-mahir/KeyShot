@@ -5,9 +5,9 @@ const weaponSelector = document.getElementById("weapon");
 
 //Mapping sound path for each weapon
 const weapons = {
-    machinegun : "sounds/machine_gun1.mp3",
-    shotgun1 : "sounds/shotgun_1.wav",
-    shotgun2 : "sounds/shotgun_2.mp3"
+    machinegun : "assets/sounds/machine_gun1.mp3",
+    shotgun1 : "assets/sounds/shotgun_1.wav",
+    shotgun2 : "assets/sounds/shotgun_2.mp3"
 }
 
 //state: Defaults to the first option in the dropdown menu
