@@ -1,3 +1,6 @@
+#[cfg(target_os = "windows")]
+mod keyboard;
+
 // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
 #[tauri::command]
 fn greet(name: &str) -> String {
@@ -8,6 +11,14 @@ fn greet(name: &str) -> String {
 pub fn run() {
     tauri::Builder::default()
         .plugin(tauri_plugin_opener::init())
+
+        .setup(|app| {
+            #[cfg(target_os = "windows")]
+            keyboard::start(app.handle().clone());
+
+            Ok(())
+        })
+        
         .invoke_handler(tauri::generate_handler![greet])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

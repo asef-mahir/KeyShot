@@ -1,3 +1,5 @@
+const { listen } = window.__TAURI__.event;
+
 const volumeSlider = document.getElementById("volume");
 const volumeValue = document.getElementById("volume-value");
 const testFireButton = document.getElementById("test-fire");
@@ -29,7 +31,15 @@ function triggerSound(){
     playGunShot(selectedWeapon);
 }
 
-document.addEventListener("keydown", triggerSound)
+// Handle keys while the KeyShot page has keyboard focus.
+document.addEventListener("keydown", triggerSound);
+
+// Handle global keys only while the KeyShot page is unfocused.
+await listen("keyshot-keypress", () => {
+    if (!document.hasFocus()) {
+        triggerSound();
+    }
+});
 
 volumeSlider.addEventListener("input", function(){
     volumeValue.textContent = `${volumeSlider.value}%`;
