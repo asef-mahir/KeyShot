@@ -59,6 +59,19 @@ header p {
     border-radius: 50%;
 }
 
+.status.is-paused {
+    color: #aaa;
+}
+
+.status.is-paused .status-dot {
+    background: #888;
+}
+
+#enabled {
+    accent-color: #39d353;
+    cursor: pointer;
+}
+
 .controls{
     text-align: left;
 }

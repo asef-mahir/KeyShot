@@ -14,12 +14,18 @@
             <p><i><b>Turn your keyboard into a weapon.</b></i></p>
         </header>
 
-        <section class="status">
+        <section class="status" id="status" role="status">
             <span class="status-dot"></span>
-            <span>ACTIVE</span>
+            <span id="status-text">ACTIVE</span>
         </section>
 
         <section class="controls">
+            <div class="control-group">
+                <label for="enabled">
+                    <input type="checkbox" id="enabled" checked>
+                    Enable keyboard sounds
+                </label>
+            </div>
             <div class="control-group">
                 <label for="weapon">Weapon</label>
                 <select id="weapon">

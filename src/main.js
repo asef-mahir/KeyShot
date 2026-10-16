@@ -4,6 +4,9 @@ const volumeSlider = document.getElementById("volume");
 const volumeValue = document.getElementById("volume-value");
 const testFireButton = document.getElementById("test-fire");
 const weaponSelector = document.getElementById("weapon");
+const enabledCheckbox = document.getElementById("enabled");
+const statusIndicator = document.getElementById("status");
+const statusText = document.getElementById("status-text");
 
 //Mapping sound path for each weapon
 const weapons = {
@@ -14,6 +17,7 @@ const weapons = {
 
 //state: Defaults to the first option in the dropdown menu
 let selectedWeapon = weaponSelector.value;   
+let isEnabled = enabledCheckbox.checked;
 
 function playGunShot(weaponKey){
     const soundpath = weapons[weaponKey];
@@ -31,13 +35,26 @@ function triggerSound(){
     playGunShot(selectedWeapon);
 }
 
+// Both keyboard sources use the same enabled-state check.
+function triggerKeyboardSound(){
+    if (isEnabled) {
+        triggerSound();
+    }
+}
+
+enabledCheckbox.addEventListener("change", function(){
+    isEnabled = enabledCheckbox.checked;
+    statusText.textContent = isEnabled ? "ACTIVE" : "PAUSED";
+    statusIndicator.classList.toggle("is-paused", !isEnabled);
+});
+
 // Handle keys while the KeyShot page has keyboard focus.
-document.addEventListener("keydown", triggerSound);
+document.addEventListener("keydown", triggerKeyboardSound);
 
 // Handle global keys only while the KeyShot page is unfocused.
 await listen("keyshot-keypress", () => {
     if (!document.hasFocus()) {
-        triggerSound();
+        triggerKeyboardSound();
     }
 });
 
