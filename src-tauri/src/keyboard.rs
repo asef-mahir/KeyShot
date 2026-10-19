@@ -1,4 +1,4 @@
-use rdev::{listen, EventType};
+use rdev::{EventType, listen};
 use tauri::{AppHandle, Emitter};
 
 pub fn start(app: AppHandle) {
