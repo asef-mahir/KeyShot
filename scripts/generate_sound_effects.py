@@ -31,14 +31,6 @@ def write_effect(filename, duration, make_sample, seed):
         audio_file.writeframes(frames)
 
 
-def pistol_sample(time, duration, rng):
-    crack = rng.uniform(-1.0, 1.0) * math.exp(-time * 100)
-    phase = 2 * math.pi * (125 * time - 32.5 * time * time / duration)
-    body = math.sin(phase) * math.exp(-time * 20)
-    thump = math.sin(2 * math.pi * 58 * time) * math.exp(-time * 15)
-    return 0.55 * crack + 0.45 * body + 0.30 * thump
-
-
 def suppressed_sample(time, duration, rng):
     pop = rng.uniform(-1.0, 1.0) * math.exp(-time * 75)
     phase = 2 * math.pi * (92 * time - 24 * time * time / duration)
@@ -102,18 +94,6 @@ def boing_sample(time, duration, rng):
     return 0.70 * envelope * spring + 0.12 * pluck
 
 
-def level_up_sample(time, duration, _rng):
-    notes = (523, 659, 784, 1047)
-    note_length = duration / len(notes)
-    note_index = min(int(time / note_length), len(notes) - 1)
-    note_time = time - note_index * note_length
-    frequency = notes[note_index]
-    envelope = math.exp(-note_time * 14)
-    tone = math.sin(2 * math.pi * frequency * note_time)
-    octave = 0.22 * math.sin(2 * math.pi * frequency * 2 * note_time)
-    return 0.72 * envelope * (tone + octave)
-
-
 def arcade_jump_sample(time, duration, rng):
     start_frequency = 430
     end_frequency = 1380
@@ -129,13 +109,11 @@ def arcade_jump_sample(time, duration, rng):
 
 def main():
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-    write_effect("pistol_shot.wav", 0.19, pistol_sample, seed=11)
     write_effect("suppressed_shot.wav", 0.18, suppressed_sample, seed=22)
     write_effect("laser_blast.wav", 0.22, laser_sample, seed=44)
     write_effect("coin_pickup.wav", 0.18, coin_sample, seed=55)
     write_effect("power_up.wav", 0.30, power_up_sample, seed=66)
     write_effect("cartoon_boing.wav", 0.28, boing_sample, seed=77)
-    write_effect("level_up.wav", 0.32, level_up_sample, seed=88)
     write_effect("arcade_jump.wav", 0.15, arcade_jump_sample, seed=111)
 
 

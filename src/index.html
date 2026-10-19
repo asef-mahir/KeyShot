@@ -10,52 +10,90 @@
 </head>
 <body>
     <main class="app">
-        <header>
-            <h1>KeyShot</h1>
-            <p><i><b>Turn your keyboard into a weapon.</b></i></p>
+        <header class="app-header">
+            <div class="brand-lockup">
+                <img class="brand-icon" src="/assets/keyshot.png" alt="">
+                <div class="brand-copy">
+                    <p class="eyebrow">KEYSTROKE SOUND STUDIO</p>
+                    <h1>KeyShot</h1>
+                </div>
+            </div>
+
+            <section class="status" id="status" role="status" aria-live="polite">
+                <span class="status-dot" aria-hidden="true"></span>
+                <span id="status-text">ACTIVE</span>
+            </section>
         </header>
 
-        <section class="status" id="status" role="status">
-            <span class="status-dot"></span>
-            <span id="status-text">ACTIVE</span>
-        </section>
+        <p class="tagline">Turn every keystroke into a sound cue.</p>
 
-        <section class="controls">
-            <div class="control-group">
-                <label for="enabled">
-                    <input type="checkbox" id="enabled" checked>
-                    Enable keyboard sounds
+        <section class="control-panel" aria-label="Sound settings">
+            <div class="toggle-row">
+                <div class="setting-copy">
+                    <span class="setting-title">Keyboard triggers</span>
+                    <span class="setting-description">Works while KeyShot is in the background</span>
+                </div>
+                <label class="toggle-control">
+                    <input type="checkbox" id="enabled" checked aria-label="Enable keyboard sounds">
+                    <span class="toggle-track" aria-hidden="true"></span>
                 </label>
             </div>
-            <div class="control-group">
-                <label for="weapon">Sound effect</label>
-                <select id="weapon">
-                    <option value="machinegun">Machine Gun</option>
-                    <option value="shotgun1">Shotgun 1</option>
-                    <option value="shotgun2">Shotgun 2</option>
-                    <option value="pistol">Pistol</option>
-                    <option value="suppressed">Suppressed Pistol</option>
-                    <option value="knife">Sword Slash</option>
-                    <option value="laser">Laser Blaster</option>
-                    <option value="coin">Coin Pickup</option>
-                    <option value="powerup">Power-Up</option>
-                    <option value="boing">Cartoon Boing</option>
-                    <option value="levelup">Level-Up Chime</option>
-                    <option value="keyboard">Mechanical Keyboard</option>
-                    <option value="jump">8-Bit Jump</option>
+
+            <div class="setting-field">
+                <div class="field-heading">
+                    <span class="field-label" id="weapon-label">Sound effect</span>
+                    <span class="field-caption">CHOOSE YOUR CUE</span>
+                </div>
+                <select id="weapon" hidden aria-hidden="true" tabindex="-1">
+                        <option value="machinegun">Machine Gun</option>
+                        <option value="shotgun1">Shotgun 1</option>
+                        <option value="shotgun2">Shotgun 2</option>
+                        <option value="suppressed">Suppressed Pistol</option>
+                        <option value="knife">Sword Slash</option>
+                        <option value="laser">Laser Blaster</option>
+                        <option value="coin">Coin Pickup</option>
+                        <option value="powerup">Power-Up</option>
+                        <option value="boing">Cartoon Boing</option>
+                        <option value="keyboard">Mechanical Keyboard</option>
+                        <option value="jump">8-Bit Jump</option>
+                        <option value="arcadeShuffle">Arcade Shuffle (5 sounds)</option>
                 </select>
+                <div class="sound-picker" id="sound-picker">
+                    <button class="sound-picker-trigger" id="weapon-trigger" type="button" role="combobox"
+                        aria-haspopup="listbox" aria-expanded="false" aria-controls="weapon-options"
+                        aria-labelledby="weapon-label selected-weapon">
+                        <span id="selected-weapon">Machine Gun</span>
+                        <span class="select-chevron" aria-hidden="true"></span>
+                    </button>
+                    <div class="sound-picker-options" id="weapon-options" role="listbox"
+                        aria-labelledby="weapon-label" hidden></div>
+                </div>
             </div>
 
-            <div class="control-group">
-                <label for="volume">
-                    Volume: <span id="volume-value">50%</span>
-                </label>
-                <input type="range" id="volume" min="0" max="100" value="50">
+            <div class="setting-field volume-field">
+                <div class="field-heading">
+                    <label class="field-label" for="volume">Output volume</label>
+                    <output class="volume-value" id="volume-value" for="volume">50%</output>
+                </div>
+                <input type="range" id="volume" min="0" max="100" value="50" aria-label="Output volume">
+                <div class="range-ends" aria-hidden="true">
+                    <span>QUIET</span>
+                    <span>LOUD</span>
+                </div>
             </div>
         </section>
 
-        <button id="test-fire" type="button">TEST FIRE 🔥</button>
-        <p class="hint">Press any key on your keyboard to fire.</p>
+        <button id="test-fire" type="button">
+            <span class="play-symbol" aria-hidden="true">▶</span>
+            <span>TEST SOUND</span>
+        </button>
+
+        <p class="hint"><span class="hint-mark" aria-hidden="true"></span>Press any key to play your selected sound—even from the tray.</p>
+        <footer class="app-footer">
+            <span>LOCAL SOUND LIBRARY</span>
+            <span class="footer-separator" aria-hidden="true">·</span>
+            <span>READY OFFLINE</span>
+        </footer>
     </main>
 </body>
 </html>
