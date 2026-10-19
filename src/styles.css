@@ -1,4 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&display=swap');
+@font-face {
+    font-family: "Orbitron";
+    src: url("assets/fonts/Orbitron-latin.woff2") format("woff2");
+    font-style: normal;
+    font-weight: 600 800;
+    font-display: swap;
+}
 
 * {
     box-sizing : border-box;

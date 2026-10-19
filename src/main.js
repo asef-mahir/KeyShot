@@ -13,8 +13,33 @@ const settingsStorageKey = "keyshot-settings";
 const weapons = {
     machinegun : "assets/sounds/machine_gun1.mp3",
     shotgun1 : "assets/sounds/shotgun_1.wav",
-    shotgun2 : "assets/sounds/shotgun_2.mp3"
+    shotgun2 : "assets/sounds/shotgun_2.mp3",
+    pistol : "assets/sounds/pistol_shot.wav",
+    suppressed : "assets/sounds/suppressed_shot.wav",
+    knife : "assets/sounds/sword-slash.mp3",
+    laser : "assets/sounds/laser_blast.wav",
+    coin : "assets/sounds/coin_pickup.wav",
+    powerup : "assets/sounds/power_up.wav",
+    boing : "assets/sounds/cartoon_boing.wav",
+    levelup : "assets/sounds/level_up.wav",
+    keyboard : "assets/sounds/mechanical_key.mp3",
+    jump : "assets/sounds/arcade_jump.wav"
 }
+
+function createAudioVoice(soundpath){
+    const audio = new Audio(soundpath);
+    audio.preload = "auto";
+    audio.load();
+    return { audio, busy: false };
+}
+
+// Start loading each local sound before the first key press.
+const audioVoices = Object.fromEntries(
+    Object.entries(weapons).map(([weaponKey, soundpath]) => [
+        weaponKey,
+        [createAudioVoice(soundpath)]
+    ])
+);
 
 function loadSettings(){
     const defaults = {
@@ -75,15 +100,33 @@ function updateStatus(){
 updateStatus();
 
 function playGunShot(weaponKey){
-    const soundpath = weapons[weaponKey];
+    const voices = audioVoices[weaponKey];
 
-    if(!soundpath){
+    if(!voices){
         console.error(`Sound file for weapon ${weaponKey} not found.`);
         return;
     }
-    const gunshot = new Audio(soundpath);
-    gunshot.volume = volumeSlider.value / 100;
-    gunshot.play();
+
+    // Reuse a loaded player when possible; add another voice if sounds overlap.
+    const voice = voices.find(candidate => !candidate.busy)
+        ?? createAudioVoice(weapons[weaponKey]);
+    if (!voices.includes(voice)) {
+        voices.push(voice);
+    }
+
+    voice.busy = true;
+    voice.audio.currentTime = 0;
+    voice.audio.volume = volumeSlider.value / 100;
+
+    const releaseVoice = () => {
+        voice.busy = false;
+        voice.audio.removeEventListener("ended", releaseVoice);
+    };
+    voice.audio.addEventListener("ended", releaseVoice, { once: true });
+    voice.audio.play().catch(error => {
+        releaseVoice();
+        console.error("Could not play sound:", error);
+    });
 }     
 
 function triggerSound(){
